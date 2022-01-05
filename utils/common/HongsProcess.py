@@ -1,8 +1,17 @@
 import cv2
 
 from utils.common.HongsModule import HongsModule
-from config import config
+from utils.common.project_paths import GetProjectPath
+import yaml
 
+
+def load_config():
+    config_path = GetProjectPath().get_project_root('config', 'config.yaml')
+    with open(config_path, 'r') as f:
+        config = yaml.full_load(f)
+    return config
+
+config = load_config()
 
 class HongsProcess(HongsModule):
     def __init__(self, video_file_path, roi_interval=1):
