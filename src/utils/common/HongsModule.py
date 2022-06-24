@@ -1,5 +1,11 @@
-import math
 import os
+import sys
+from pathlib import Path
+
+ROOT_DIR = str(Path(__file__).parents[2])
+sys.path.append(ROOT_DIR)
+
+import math
 import pickle
 from typing import Union
 
@@ -8,7 +14,7 @@ import numpy as np
 import torch
 import torch.nn
 import uuid
-from models.VGG16 import VGG16
+from models import VGG16
 from utils.common.project_paths import GetProjectPath
 
 
@@ -81,7 +87,7 @@ class HongsModule:
         # answer_vectors = torch.stack(answer_vectors_list).view(
         #     [len(answer_vectors_list), 1000]
         # )
-        return answer_vector
+        return answer_vector.to('cuda')
 
     def get_video_path(self, video: Union[str, int, None] = None):
         """비디오 경로를 호출하는 함수입니다.

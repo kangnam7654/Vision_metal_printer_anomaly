@@ -1,10 +1,18 @@
-import numpy as np
+import os
+import sys
+from pathlib import Path
+
+ROOT_DIR = str(Path(__file__).parents[1])
+sys.path.append(ROOT_DIR)
+
 import torchvision.models as models
 from utils.data_process import torch_dataset
+
 import pickle
 from torch.utils.data import DataLoader
 import torch
 import copy
+
 
 def model_freeze(model):
     for param in model.parameters():
@@ -13,7 +21,6 @@ def model_freeze(model):
 
 
 def load_vgg16(freeze_sw=True, device=None):
-    import torch
     if not device:
         device_set = 'cuda' if torch.cuda.is_available() else 'cpu'
     else:

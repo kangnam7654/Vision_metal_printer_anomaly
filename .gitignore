@@ -1,8 +1,9 @@
 # 여기에 추가
-/documents
-/data
-/test
-/.idea
+__etc
+documents
+data
+test
+.idea
 __main__.py
 icon.png
 background.png

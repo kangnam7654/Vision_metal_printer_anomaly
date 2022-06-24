@@ -41,6 +41,6 @@ class SAMPLE(HongsProcess):
 
 
 if __name__ == '__main__':
-    file = '/Users/kimkangnam/Desktop/Project/CompanyProject/DataVoucher/Hongsworks/data/source_videos/15_00_56.avi'
+    file = 'D:\project\Hongsworks\src\data\source_videos\\15_00_56.avi'
     sample = SAMPLE(file, roi_interval=2)
-    sample.sample_flow(play_speed=3)
+    sample.sample_flow(play_speed=2)
