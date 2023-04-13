@@ -14,8 +14,6 @@ import numpy as np
 import torch
 import torch.nn
 import uuid
-from models import VGG16
-from utils.common.project_paths import GetProjectPath
 
 
 class HongsModule:
@@ -24,12 +22,11 @@ class HongsModule:
         :param video_file_path: 비디오의 경로입니다. 경로에 비디오가 없을경우, 캠이 켜지게 됩니다.
         :param roi_interval: 몇 프레임마다 ROI 부분을 추출하는지 결정하는 변수입니다.
         """
-        self.__paths = GetProjectPath()
         self.video_file = self.get_video_path(video=video_file_path)
         self.cap = cv2.VideoCapture(self.video_file)
         self.aspect_ratio = self.get_aspect_ratio()
         self.answer_vectors = self.get_answer_vectors()
-        self.model = VGG16.model_freeze(VGG16.load_vgg16())
+        self.model = "MODEL"
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
         # video status

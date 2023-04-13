@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 
-
 class GetProjectPath:
     def __init__(self):
         self.root_dir = self.get_project_root()
@@ -15,7 +14,7 @@ class GetProjectPath:
 
     @staticmethod
     def get_project_root(*paths):
-        project_root = os.path.join(Path(__file__).parent.parent.parent, *paths)
+        project_root = os.path.join(Path(__file__).parents[2], *paths)
         return project_root
 
     def get_pickle_folder(self, *paths):
