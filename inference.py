@@ -1,6 +1,5 @@
 import argparse
 import torch
-import torch.nn as nn
 import numpy as np
 import cv2
 from video_palyer import VideoPlayer
@@ -36,28 +35,33 @@ def main(args):
     model = ResNetSimCLR(base_model="resnet18")
     model.eval()
     model.to(args.device)
-    
+
     alert = False
+
     while True:
         suspicious = 0
         frame = player.get_single_frame()
         player.fill_buffer(frame)
+
         if player.is_buffer_full():
             cv2.imshow("video", frame)
             if cv2.waitKey(1) == ord("q"):
                 cv2.destroyAllWindows()
+
             buffer = player.get_buffer()
             data = preprocess(buffer, args.device)
             outs, _ = model(data)
             mean_outs = torch.mean(outs, dim=0)
             for out in outs:
                 sim = torch.cosine_similarity(mean_outs, out, dim=0)
+
                 if sim <= args.threshold:
                     suspicious += 1
             if suspicious >= 5:
                 alert = True
+
             if alert:
-                print("Anomal")
+                print("Anomaly")
 
 
 if __name__ == "__main__":
